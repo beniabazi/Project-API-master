@@ -1,4 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
+<<<<<<< HEAD
+  const modal = document.getElementById("appointment-modal");
+  const closeButton = document.querySelector(".close");
+
+  function openAppointmentModal(message) {
+    const appointmentForm = document.getElementById("appointment-form");
+    if (appointmentForm) appointmentForm.reset();
+    
+    document.querySelector("#appointment-modal .modal-content p").textContent = message;
+    modal.style.display = "block";
+  }
+  
+=======
 
   const modal = document.getElementById("appointment-modal");
   const closeButton = document.querySelector(".close");
@@ -42,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Close modal
+>>>>>>> fb14e8fdee72b90a0df1ff5364a2cad274d9a209
   function closeAppointmentModal() {
     if (modal) modal.style.display = "none";
   }
@@ -56,12 +70,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+<<<<<<< HEAD
+=======
   // Load calendar data
+>>>>>>> fb14e8fdee72b90a0df1ff5364a2cad274d9a209
   function loadCalendar() {
     const staffId = document.getElementById("staff").value;
     const currentMonthYear = document.getElementById("currentMonthYear").textContent;
     const [month, year] = currentMonthYear.split(" ");
-    const monthIndex = new Date(Date.parse(month +" 1, 2022")).getMonth();
+    const monthIndex = new Date(Date.parse(month + " 1, 2022")).getMonth();
     
     fetch(`load_calendar.php?action=fetch_appointments&staff_id=${staffId}&month=${monthIndex + 1}&year=${year}`)
       .then(response => response.json())
@@ -73,12 +90,23 @@ document.addEventListener("DOMContentLoaded", function () {
             const dayDiv = document.createElement("div");
             dayDiv.className = "calendar-day";
             dayDiv.textContent = day.date;
+<<<<<<< HEAD
+
+=======
             
+>>>>>>> fb14e8fdee72b90a0df1ff5364a2cad274d9a209
             if (day.appointments && day.appointments.length > 0) {
               dayDiv.classList.add("has-appointments");
               dayDiv.addEventListener("click", () => {
                 openAppointmentModal(`Appointments for ${day.date}: ${day.appointments.join(", ")}`);
               });
+<<<<<<< HEAD
+            } else {
+              dayDiv.addEventListener("click", () => {
+                openAppointmentModal(`Create a new appointment for ${day.date}`);
+              });
+=======
+>>>>>>> fb14e8fdee72b90a0df1ff5364a2cad274d9a209
             }
             
             calendarGrid.appendChild(dayDiv);
@@ -88,6 +116,32 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(error => console.error("Error loading calendar:", error));
   }
 
+<<<<<<< HEAD
+  function changeMonth(direction) {
+    const currentMonthYear = document.getElementById("currentMonthYear");
+    if (currentMonthYear) {
+      let [month, year] = currentMonthYear.textContent.split(" ");
+      const monthIndex = new Date(Date.parse(month +" 1, 2022")).getMonth();
+      const newDate = new Date(year, monthIndex + direction);
+      const newMonth = newDate.toLocaleString('default', { month: 'long' });
+      const newYear = newDate.getFullYear();
+      currentMonthYear.textContent = `${newMonth} ${newYear}`;
+      loadCalendar();
+    }
+  }
+
+  document.getElementById("delete-appointment").addEventListener("click", function () {
+    const reason = prompt("Please enter the reason for deleting this appointment:");
+    if (reason) {
+      deleteAppointment(reason);
+    }
+  });
+
+  function deleteAppointment(reason) {
+    // Implement the deletion logic here
+    console.log("Deleting appointment with reason:", reason);
+    // Call the server to delete the appointment
+=======
   // Handle appointment form submission
   const appointmentForm = document.getElementById("appointment-form");
   if (appointmentForm) {
@@ -122,9 +176,9 @@ document.addEventListener("DOMContentLoaded", function () {
         openAppointmentModal("An error occurred while saving the appointment.");
       });
     });
+>>>>>>> fb14e8fdee72b90a0df1ff5364a2cad274d9a209
   }
 
-  // Initialize calendar on page load
   loadCalendar();
 
   // Change month event listeners

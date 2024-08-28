@@ -103,6 +103,7 @@ include 'process_form.php';
                     
                     <button type="submit">Save Appointment</button>
                 </form>
+                <button id="delete-appointment">Delete Appointment</button>
             </div>
         </div>
     </div>
