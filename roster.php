@@ -1,6 +1,7 @@
 <?php
+// Include the database connection and data management files
 include 'db_connect.php';
-
+include 'manage_data.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +11,20 @@ include 'db_connect.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Scheduling - Monthly View</title>
     <link rel="stylesheet" href="style/roster.css">
+    <script>
+      // Ensure JavaScript functions are available globally
+      function changeMonth(direction) {
+        if (typeof window.changeMonth === 'function') {
+          window.changeMonth(direction);
+        }
+      }
+
+      function loadCalendar() {
+        if (typeof window.loadCalendar === 'function') {
+          window.loadCalendar();
+        }
+      }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -20,7 +35,7 @@ include 'db_connect.php';
                     <a href="adminhome.php">Admin</a>
                 </li>
                 <li><a href="roster.php">Roster</a></li>
-                <li><a href="">Logout</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
 
@@ -36,9 +51,9 @@ include 'db_connect.php';
 
             <!-- Date Selector -->
             <div class="date-selector">
-                <button onclick="changeMonth(-1)">Previous Month</button>
+                <button type="button" onclick="changeMonth(-1)">Previous Month</button>
                 <span id="currentMonthYear">August 2024</span>
-                <button onclick="changeMonth(1)">Next Month</button>
+                <button type="button" onclick="changeMonth(1)">Next Month</button>
             </div>
 
             <!-- Staff Selector -->
@@ -87,6 +102,7 @@ include 'db_connect.php';
                     
                     <button type="submit">Save Appointment</button>
                 </form>
+                <button id="delete-appointment">Delete Appointment</button>
             </div>
         </div>
     </div>

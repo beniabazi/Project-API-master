@@ -35,6 +35,11 @@ document.addEventListener("DOMContentLoaded", function () {
       tableId: "room-bookings-table",
       fields: ["resident-id", "room-number", "check-in-date", "check-out-date"],
     },
+    // New form for user creation
+    "users-form": {
+      tableId: "users-table",
+      fields: ["username","password", "email", "role"],
+    },
   };
 
   Object.keys(formSubmissions).forEach((formId) => {
@@ -132,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Fetch data for all tables when the page loads
-  const tables = ["equipment", "family_members", "individual_needs", "medications", "residents", "room_bookings"];
+  const tables = ["equipment", "family_members", "individual_needs", "medications", "residents", "room_bookings", "users"];
   tables.forEach((table) => fetchDataFromServer(table));
 
   // Refresh data every 5 minutes (300000 milliseconds)
