@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
       tableId: "room-bookings-table",
       fields: ["resident-id", "room-number", "check-in-date", "check-out-date"],
     },
-    // New form for user creation
+    // User creation form
     "users-form": {
       tableId: "users-table",
       fields: ["username", "password", "email", "role"],
@@ -51,7 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const table = document.getElementById(tableId).getElementsByTagName("tbody")[0];
         const row = table.insertRow();
         fields.forEach((field) => {
-          row.insertCell().innerText = document.getElementById(field).value;
+          const cell = row.insertCell();
+          cell.innerText = document.getElementById(field).value;
         });
         form.reset();
         const tableName = tableId.replace("-table", "");
@@ -64,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".nav ul li a").forEach((link) => {
     link.addEventListener("click", function (e) {
       const formId = this.getAttribute("data-form-id");
-
       if (formId) {
         e.preventDefault(); // Only prevent default if the link is tied to a form
         showForm(formId);
@@ -135,7 +135,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const tableBody = document.querySelector(`#${tableName}-table tbody`);
     if (tableBody) {
       tableBody.innerHTML = ""; // Clear existing rows
-
       data.forEach((row) => {
         const tr = document.createElement("tr");
         Object.values(row).forEach((value) => {
