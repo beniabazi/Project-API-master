@@ -1,9 +1,8 @@
 <?php
-// Include the database connection and data management files
+// Include the necessary files for database connection and data management
 include 'db_connect.php';
-include 'manage_data.php';
-include 'fetch_data.php';
-include 'process_form.php';
+include 'fetch_data.php'; // If needed for specific data fetching
+include 'process_form.php'; // Ensure this handles form submissions securely
 ?>
 
 <!DOCTYPE html>
@@ -13,17 +12,16 @@ include 'process_form.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrator Portal</title>
-    <link rel="stylesheet" href="style/style.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body>
     <div class="container">
         <nav class="nav">
-            <h1 class="logo"><img src="/img/logo.svg" alt="Dashboard Image"></h1>
+            <h1 class="logo"><img src="/img/logo.svg" alt="Dashboard Logo"></h1>
             <ul>
-                <li><a href="#">Logout</a></li>
+                <li><a href="logout.php">Logout</a></li>
                 <li><a href="roster.php">Roster</a></li>
-
                 <li>
                     <a href="#" class="dropbtn">Admin</a>
                     <div id="adminDropdown" class="dropdown-content">
@@ -40,10 +38,10 @@ include 'process_form.php';
             </ul>
         </nav>
 
-        <div id="tablet-warning">
+        <div id="tablet-warning" class="warning hidden">
             <p><strong>Tablet view not supported, please view website on a laptop or desktop.</strong></p>
         </div>
-        <div id="mobile-warning">
+        <div id="mobile-warning" class="warning hidden">
             <p><strong>Mobile view not supported, please view website on a laptop or desktop.</strong></p>
         </div>
 
@@ -55,7 +53,7 @@ include 'process_form.php';
             <!-- Users Section -->
             <section id="user-section" class="form active">
                 <h2>Manage Users</h2>
-                <form id="user-form" action="process_form.php" method="post">
+                <form id="users-form" action="process_form.php" method="post">
                     <input type="text" name="username" id="username" placeholder="Username" required>
                     <input type="email" name="email" id="email" placeholder="Email Address" required>
                     <input type="password" name="password" id="password" placeholder="Password" required>
@@ -82,8 +80,8 @@ include 'process_form.php';
                 </table>
             </section>
 
-                       <!-- Residents Section -->
-                       <section id="residents-section" class="form">
+            <!-- Residents Section -->
+            <section id="residents-section" class="form">
                 <h2>Manage Residents</h2>
                 <form id="residents-form" action="process_form.php" method="post">
                     <input type="text" name="resident-name" id="resident-name" placeholder="Resident Name" required>
@@ -106,8 +104,6 @@ include 'process_form.php';
                     </tbody>
                 </table>
             </section>
-
-
 
             <!-- Equipment Section -->
             <section id="equipment-section" class="form">
@@ -138,7 +134,7 @@ include 'process_form.php';
             <section id="family-section" class="form">
                 <h2>Manage Family Members</h2>
                 <form id="family-form" action="process_form.php" method="post">
-                    <input type="text" name="resident-id" id="resident-id" placeholder="Resident ID" required>
+                    <input type="text" name="resident-id" id="resident-id-family" placeholder="Resident ID" required>
                     <input type="text" name="family-member-name" id="family-member-name" placeholder="Family Member Name" required>
                     <input type="text" name="relationship" id="relationship" placeholder="Relationship">
                     <input type="text" name="contact-details" id="contact-details" placeholder="Contact Details">
@@ -163,7 +159,7 @@ include 'process_form.php';
             <section id="needs-section" class="form">
                 <h2>Manage Individual Needs</h2>
                 <form id="needs-form" action="process_form.php" method="post">
-                    <input type="text" name="resident-id" id="resident-id" placeholder="Resident ID" required>
+                    <input type="text" name="resident-id" id="resident-id-needs" placeholder="Resident ID" required>
                     <input type="text" name="need-description" id="need-description" placeholder="Need Description">
                     <input type="text" name="priority" id="priority" placeholder="Priority Level">
                     <input type="text" name="service-provider" id="service-provider" placeholder="Service Provider">
@@ -188,7 +184,7 @@ include 'process_form.php';
             <section id="medications-section" class="form">
                 <h2>Manage Medications</h2>
                 <form id="medications-form" action="process_form.php" method="post">
-                    <input type="text" name="resident-id" id="resident-id" placeholder="Resident ID" required>
+                    <input type="text" name="resident-id" id="resident-id-medications" placeholder="Resident ID" required>
                     <input type="text" name="medication-name" id="medication-name" placeholder="Medication Name" required>
                     <input type="text" name="dosage" id="dosage" placeholder="Dosage">
                     <input type="text" name="frequency" id="frequency" placeholder="Frequency">
@@ -211,16 +207,14 @@ include 'process_form.php';
                 </table>
             </section>
 
- 
-
             <!-- Room Bookings Section -->
             <section id="room-bookings-section" class="form">
                 <h2>Manage Room Bookings</h2>
                 <form id="room-bookings-form" action="process_form.php" method="post">
-                    <input type="text" name="resident-id" id="resident-id" placeholder="Resident ID" required>
+                    <input type="text" name="resident-id" id="resident-id-room-bookings" placeholder="Resident ID" required>
                     <input type="text" name="room-number" id="room-number" placeholder="Room Number" required>
-                    <input type="date" name="check-in-date" id="check-in-date" placeholder="Check-in Date" required>
-                    <input type="date" name="check-out-date" id="check-out-date" placeholder="Check-out Date" required>
+                    <input type="date" name="check-in-date" id="check-in-date" required>
+                    <input type="date" name="check-out-date" id="check-out-date" required>
                     <button type="submit">Save</button>
                 </form>
                 <table id="room-bookings-table">

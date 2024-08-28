@@ -44,21 +44,19 @@ function handleAppointment($date, $time, $needs, $staff_id) {
             if (!$stmt) throw new Exception("Prepare failed: " . $conn->error);
 
             $stmt->bind_param("ssis", $time, $needs, $staff_id, $date);
-            $stmt->execute();
         } else {
             $sql = "INSERT INTO appointments (staff_id, date, time, needs) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             if (!$stmt) throw new Exception("Prepare failed: " . $conn->error);
 
             $stmt->bind_param("isss", $staff_id, $date, $time, $needs);
-            $stmt->execute();
         }
-
+        $stmt->execute();
         echo json_encode(['success' => true]);
         $stmt->close();
     } catch (Exception $e) {
         error_log($e->getMessage());
-        echo json_encode(['success' => false]);
+        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
     }
 }
 
@@ -72,12 +70,11 @@ function deleteAppointment($staff_id, $date) {
 
         $stmt->bind_param("is", $staff_id, $date);
         $stmt->execute();
-
         echo json_encode(['success' => true]);
         $stmt->close();
     } catch (Exception $e) {
         error_log($e->getMessage());
-        echo json_encode(['success' => false]);
+        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
     }
 }
 
@@ -94,10 +91,8 @@ function fetchData($tableName) {
         $result = $conn->query($sql);
         if ($result === false) throw new Exception("Query failed: " . $conn->error);
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $data[] = $row;
-            }
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
         }
     } catch (Exception $e) {
         error_log($e->getMessage());

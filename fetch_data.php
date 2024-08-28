@@ -1,11 +1,6 @@
 <?php
-// Include the database connection and data management files
+// Include the database connection file
 include 'db_connect.php';
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Function to sanitize input
 function sanitize_input($data) {
@@ -15,8 +10,8 @@ function sanitize_input($data) {
 // Get table name from query parameters and sanitize it
 $tableName = isset($_GET['table']) ? sanitize_input($_GET['table']) : '';
 
-if (!$tableName) {
-    echo json_encode([]);
+if (empty($tableName)) {
+    echo json_encode(['error' => 'No table specified']);
     exit();
 }
 
@@ -32,24 +27,26 @@ $validTables = [
 ];
 
 if (!in_array($tableName, $validTables)) {
-    echo json_encode([]);
+    echo json_encode(['error' => 'Invalid table name']);
     exit();
 }
 
-// Prepare the SQL query based on the table name
-$sql = "SELECT * FROM $tableName";
-$result = $conn->query($sql);
+try {
+    // Prepare the SQL query based on the table name
+    $sql = "SELECT * FROM $tableName";
+    
+    // Prepare and execute the statement
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
 
-$data = [];
+    // Fetch data
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $data[] = $row;
-    }
+    // Send response
+    echo json_encode($data);
+
+} catch (PDOException $e) {
+    // Handle errors
+    echo json_encode(['error' => 'Database query failed: ' . $e->getMessage()]);
 }
-
-echo json_encode($data);
-
-// Close connection
-$conn->close();
 ?>

@@ -1,5 +1,5 @@
 <?php
-// Include the database connection and data management files
+// Include the database connection file
 include 'db_connect.php';
 
 // Check connection
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $sql = "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssss", $username, $email, $password, $role);
+        $stmt->bind_param("ssss", $username, $email, password_hash($password, PASSWORD_DEFAULT), $role);
 
     } elseif (isset($_POST['resident-name'])) {
         // Residents form submission
@@ -41,11 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Equipment form submission
         $equipment_name = sanitize_input($_POST['equipment-name']);
         $category = sanitize_input($_POST['category']);
-        $quantity = sanitize_input($_POST['quantity']);
+        $quantity = (int) sanitize_input($_POST['quantity']); // Ensure quantity is treated as an integer
         $condition = sanitize_input($_POST['condition']);
 
         $sql = "INSERT INTO equipment (equipment_name, category, quantity, condition) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
+        $stmt->prepare($sql);
         $stmt->bind_param("ssis", $equipment_name, $category, $quantity, $condition);
 
     } elseif (isset($_POST['family-member-name'])) {
@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $service_provider = sanitize_input($_POST['service-provider']);
 
         $sql = "INSERT INTO individual_needs (resident_id, need_description, priority, service_provider) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
+        $stmt->prepare($sql);
         $stmt->bind_param("ssss", $resident_id, $need_description, $priority, $service_provider);
 
     } elseif (isset($_POST['medication-name'])) {
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check_out_date = sanitize_input($_POST['check-out-date']);
 
         $sql = "INSERT INTO room_bookings (resident_id, room_number, check_in_date, check_out_date) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
+        $stmt->prepare($sql);
         $stmt->bind_param("ssss", $resident_id, $room_number, $check_in_date, $check_out_date);
 
     } else {

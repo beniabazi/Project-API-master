@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // New form for user creation
     "users-form": {
       tableId: "users-table",
-      fields: ["username","password", "email", "role"],
+      fields: ["username", "password", "email", "role"],
     },
   };
 
@@ -69,7 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault(); // Only prevent default if the link is tied to a form
         showForm(formId);
       }
-      // No else block needed, as the link will default to normal behavior if no formId exists
     });
   });
 
@@ -82,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const startDate = document.getElementById("start-date").value;
       const endDate = document.getElementById("end-date").value;
       console.log(`Generating ${reportType} report from ${startDate} to ${endDate}`);
-      // Send this data to the server to generate the report
+      // Add code to send this data to the server to generate the report
     });
   }
 
@@ -102,7 +101,9 @@ document.addEventListener("DOMContentLoaded", function () {
     modal.classList.add("hidden");
   }
 
-  closeButton.addEventListener("click", closeModal);
+  if (closeButton) {
+    closeButton.addEventListener("click", closeModal);
+  }
 
   window.addEventListener("click", function (event) {
     if (event.target === modal) {
@@ -113,27 +114,38 @@ document.addEventListener("DOMContentLoaded", function () {
   // Function to fetch data from the server
   function fetchDataFromServer(tableName) {
     fetch(`fetch_data.php?table=${tableName}`)
-      .then((response) => response.json())
-      .then((data) => {
-        updateTable(tableName, data);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
       })
-      .catch((error) => console.error("Error:", error));
+      .then((data) => {
+        if (Array.isArray(data)) {
+          updateTable(tableName, data);
+        } else {
+          console.error("Invalid data format:", data);
+        }
+      })
+      .catch((error) => console.error("Fetch error:", error));
   }
 
   // Function to update table with fetched data
   function updateTable(tableName, data) {
     const tableBody = document.querySelector(`#${tableName}-table tbody`);
-    tableBody.innerHTML = ""; // Clear existing rows
+    if (tableBody) {
+      tableBody.innerHTML = ""; // Clear existing rows
 
-    data.forEach((row) => {
-      const tr = document.createElement("tr");
-      Object.values(row).forEach((value) => {
-        const td = document.createElement("td");
-        td.textContent = value;
-        tr.appendChild(td);
+      data.forEach((row) => {
+        const tr = document.createElement("tr");
+        Object.values(row).forEach((value) => {
+          const td = document.createElement("td");
+          td.textContent = value;
+          tr.appendChild(td);
+        });
+        tableBody.appendChild(tr);
       });
-      tableBody.appendChild(tr);
-    });
+    }
   }
 
   // Fetch data for all tables when the page loads
