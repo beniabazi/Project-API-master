@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -15,3 +16,10 @@ $conn = new mysqli($DB_SERVER, $DB_USERNAME, $DB_PASSWORD, $DB_DATABASE);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+=======
+$server = 'localhost';
+$db = 's103332735_db';
+$username = 'root';
+$password = '';
+?>
+>>>>>>> fb14e8fdee72b90a0df1ff5364a2cad274d9a209

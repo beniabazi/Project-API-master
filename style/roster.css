@@ -316,6 +316,7 @@ form textarea {
     width: 100%;
     box-sizing: border-box;
 }
+<<<<<<< HEAD
 
 #delete-appointment {
     padding: 10px;
@@ -331,3 +332,5 @@ form textarea {
 #delete-appointment:hover {
     background-color: #ff0000;
 }
+=======
+>>>>>>> fb14e8fdee72b90a0df1ff5364a2cad274d9a209
