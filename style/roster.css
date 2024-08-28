@@ -14,7 +14,7 @@ html {
   }
 
   #tablet-warning p {
-    padding: 200px 20px !important;
+    padding: 100px 20px !important; /* Adjusted padding for better display on tablets */
   }
 
   main {
@@ -26,25 +26,14 @@ html {
   }
 }
 
-#tablet-warning {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #404040;
-  z-index: 1000;
-  text-align: center;
-}
-
 /* ------------------MOBILE MODE----------------------- */
-@media (min-width: 1px) and (max-width: 599px) {
+@media (max-width: 599px) {
   #mobile-warning {
     display: block !important;
   }
 
   #mobile-warning p {
-    padding: 200px 20px !important;
+    padding: 100px 20px !important; /* Adjusted padding for better display on mobile */
   }
 
   main {
@@ -56,6 +45,7 @@ html {
   }
 }
 
+#tablet-warning,
 #mobile-warning {
   display: none;
   position: fixed;
@@ -72,9 +62,8 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 20px;
+    padding: 10px 20px; /* Adjusted padding */
     background-color: #F2f2f2;
-    text-decoration: none;
     font-size: 15px;
 }
 
@@ -84,7 +73,7 @@ nav {
 
 nav a {
     display: block;
-    padding: 15px;
+    padding: 10px; /* Adjusted padding */
     background-color: #F2f2f2;
     text-decoration: none;
     color: #404040;
@@ -92,7 +81,6 @@ nav a {
 
 nav a:visited {
     color: #404040;
-    text-decoration: none;
 }
 
 nav a:hover {
@@ -114,7 +102,6 @@ nav ul {
 
 nav li {
     position: relative;
-    float: right;
 }
 
 /* Dropdown Menu */
@@ -125,11 +112,10 @@ nav li {
 .dropdown .dropbtn {
     background-color: #F2f2f2;
     color: #404040;
-    padding: 15px;
+    padding: 10px; /* Adjusted padding */
     font-size: 15px;
     border: none;
     cursor: pointer;
-    text-decoration: none;
 }
 
 .dropdown-content {
@@ -143,10 +129,9 @@ nav li {
 
 .dropdown-content a {
     color: #404040;
-    padding: 12px 16px;
+    padding: 10px 15px; /* Adjusted padding */
     text-decoration: none;
     display: block;
-    text-align: left;
 }
 
 .dropdown-content a:hover {
@@ -163,15 +148,15 @@ nav li {
 
 /* Container */
 .roster {
-    width: 80%;
-    margin: 0px auto;
-    padding: 0px auto;
+    width: 90%; /* Adjusted for better responsiveness */
+    margin: 0 auto;
+    padding: 0;
 }
 
 .container {
     width: 100%;
     margin: 0;
-    padding-top: 0px;
+    padding-top: 0;
 }
 
 h1 {
@@ -180,12 +165,14 @@ h1 {
     font-size: 24px;
 }
 
-.date-selector {
+.date-selector,
+.staff-selector {
     text-align: center;
     margin-bottom: 20px;
 }
 
-.date-selector button {
+.date-selector button,
+form button {
     padding: 10px;
     font-size: 16px;
     background-color: #DAC3AB;
@@ -193,26 +180,18 @@ h1 {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    margin: 0 10px;
+    margin: 0 5px; /* Adjusted margin for better spacing */
 }
 
-.date-selector button:hover {
+.date-selector button:hover,
+form button:hover {
     background-color: #ff8400;
 }
 
-.date-selector span {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.staff-selector {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
+.date-selector span,
 .staff-selector label {
     font-size: 18px;
-    margin-right: 10px;
+    font-weight: bold;
 }
 
 .staff-selector select {
@@ -226,8 +205,8 @@ h1 {
 .calendar-container {
     display: flex;
     justify-content: center;
-    width: 120vh;
-    height: 70vh;
+    width: 100%; /* Adjusted for better responsiveness */
+    max-width: 1200px; /* Set a maximum width */
     margin: 0 auto;
 }
 
@@ -239,21 +218,23 @@ h1 {
     width: 100%;
 }
 
-.day-header {
-    background-color: #f0f0f0;
+.day-header,
+.calendar-day {
     padding: 10px;
     text-align: center;
-    font-weight: bold;
     border: 1px solid #ddd;
+}
+
+.day-header {
+    background-color: #f0f0f0;
+    font-weight: bold;
 }
 
 .calendar-day {
     background-color: #fff;
     min-height: 100px;
-    padding: 10px;
     box-sizing: border-box;
     position: relative;
-    border: 1px solid #ddd;
 }
 
 .calendar-day:hover {
@@ -334,19 +315,4 @@ form textarea {
     margin-bottom: 15px;
     width: 100%;
     box-sizing: border-box;
-}
-
-form button {
-    padding: 10px;
-    font-size: 16px;
-    background-color: #DAC3AB;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin: 5px 0;
-    border-radius: 10px;
-}
-
-form button:hover {
-    background-color: #ff8400;
 }

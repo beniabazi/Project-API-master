@@ -1,3 +1,11 @@
+<?php
+// Include the database connection and data management files
+include 'db_connect.php';
+include 'manage_data.php';
+include 'fetch_data.php';
+include 'process_form.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +27,7 @@
                 <li>
                     <a href="#" class="dropbtn">Admin</a>
                     <div id="adminDropdown" class="dropdown-content">
+                        <a href="#" data-form-id="user-section">Users</a>
                         <a href="#" data-form-id="residents-section">Residents</a>
                         <a href="#" data-form-id="family-section">Family Members</a>
                         <a href="#" data-form-id="needs-section">Individual Needs</a>
@@ -42,6 +51,63 @@
             <header>
                 <h1>Welcome to the Admin Portal</h1>
             </header>
+
+            <!-- Users Section -->
+            <section id="user-section" class="form active">
+                <h2>Manage Users</h2>
+                <form id="user-form" action="process_form.php" method="post">
+                    <input type="text" name="username" id="username" placeholder="Username" required>
+                    <input type="email" name="email" id="email" placeholder="Email Address" required>
+                    <input type="password" name="password" id="password" placeholder="Password" required>
+                    <select name="role" id="role" required>
+                        <option value="" disabled selected>Select Role</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Supervisor">Supervisor</option>
+                        <option value="User">User</option>
+                    </select>
+                    <button type="submit">Create User</button>
+                </form>
+                <table id="users-table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Users Data Will Go Here -->
+                    </tbody>
+                </table>
+            </section>
+
+                       <!-- Residents Section -->
+                       <section id="residents-section" class="form">
+                <h2>Manage Residents</h2>
+                <form id="residents-form" action="process_form.php" method="post">
+                    <input type="text" name="resident-name" id="resident-name" placeholder="Resident Name" required>
+                    <input type="text" name="resident-details" id="resident-details" placeholder="Details">
+                    <input type="text" name="emergency-contact" id="emergency-contact" placeholder="Emergency Contact">
+                    <input type="text" name="care-plan" id="care-plan" placeholder="Care Plan">
+                    <button type="submit">Save</button>
+                </form>
+                <table id="residents-table">
+                    <thead>
+                        <tr>
+                            <th>Resident Name</th>
+                            <th>Details</th>
+                            <th>Emergency Contact</th>
+                            <th>Care Plan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Residents Data Will Go Here -->
+                    </tbody>
+                </table>
+            </section>
+
+
 
             <!-- Equipment Section -->
             <section id="equipment-section" class="form">
@@ -145,30 +211,7 @@
                 </table>
             </section>
 
-            <!-- Residents Section -->
-            <section id="residents-section" class="form active">
-                <h2>Manage Residents</h2>
-                <form id="residents-form" action="process_form.php" method="post">
-                    <input type="text" name="resident-name" id="resident-name" placeholder="Resident Name" required>
-                    <input type="text" name="resident-details" id="resident-details" placeholder="Details">
-                    <input type="text" name="emergency-contact" id="emergency-contact" placeholder="Emergency Contact">
-                    <input type="text" name="care-plan" id="care-plan" placeholder="Care Plan">
-                    <button type="submit">Save</button>
-                </form>
-                <table id="residents-table">
-                    <thead>
-                        <tr>
-                            <th>Resident Name</th>
-                            <th>Details</th>
-                            <th>Emergency Contact</th>
-                            <th>Care Plan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Residents Data Will Go Here -->
-                    </tbody>
-                </table>
-            </section>
+ 
 
             <!-- Room Bookings Section -->
             <section id="room-bookings-section" class="form">
