@@ -2,11 +2,8 @@
 // Include the database connection and data management files
 include 'db_connect.php';
 include 'manage_data.php';
-<<<<<<< HEAD
-=======
 include 'fetch_data.php';
 include 'process_form.php';
->>>>>>> fb14e8fdee72b90a0df1ff5364a2cad274d9a209
 ?>
 <!DOCTYPE html>
 <html lang="en">
