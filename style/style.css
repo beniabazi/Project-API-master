@@ -1,0 +1,298 @@
+
+/* Global Styles */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* ------------------TABLET MODE----------------------- */
+@media (min-width: 600px) and (max-width: 950px) {
+  #tablet-warning {
+    display: inline !important;
+  }
+
+  #tablet-warning p {
+    padding: 200px 20px !important;
+  }
+
+  main {
+    display: none;
+  }
+
+  .acknowledgment {
+    display: none;
+  }
+}
+
+#tablet-warning {
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #404040;
+  z-index: 1000;
+  text-align: center;
+}
+
+/* ------------------MOBILE MODE----------------------- */
+@media (min-width: 1px) and (max-width: 599px) {
+  #mobile-warning {
+    display: inline !important;
+  }
+
+  #mobile-warning p {
+    padding: 200px 20px !important;
+  }
+
+  main {
+    display: none;
+  }
+
+  .acknowledgment {
+    display: none;
+  }
+}
+
+#mobile-warning {
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #404040;
+  z-index: 1000;
+  text-align: center;
+}
+
+/* Container Styles */
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Change to column for top-aligned sidebar */
+}
+
+/* Sidebar Styles */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  background-color: #f2f2f2;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.logo img {
+  height: 40px;
+}
+
+nav a {
+  display: flex;
+  padding: 15px;
+  background-color: #f2f2f2;
+  text-decoration: none;
+  color: #404040;
+}
+
+nav a:visited {
+  color: #404040;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #404040;
+  text-decoration-line: underline;
+  background-color: #dac3ab;
+}
+
+#active {
+  background-color: #dac3ab;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
+nav li {
+  float: right;
+}
+
+/* Dropdown Menu Styles */
+.dropbtn {
+  cursor: pointer;
+  padding: 15px;
+  background-color: #f2f2f2;
+  color: #404040;
+  border: none;
+  font-size: 15px;
+  text-align: left;
+  
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f2f2f2;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content li {
+  display: block;
+  padding: 10px;
+}
+
+.dropdown-content li a {
+  text-decoration: none;
+  color: #404040;
+  display: block;
+  padding: 10px 15px;
+}
+
+.dropdown-content li a:hover {
+  background-color: #dac3ab;
+}
+
+.show {
+  display: block;
+}
+
+/* Main Content Styles */
+.main-content {
+  flex: 1;
+  margin-left: 0;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  margin: 0 auto;
+  padding: 20px 20px 20px 20px;
+}
+
+.btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Form Styles */
+.form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: none;
+  width: 80%;
+  margin: 20px auto;
+}
+
+.form.active {
+  display: block;
+}
+
+.form h2 {
+  margin-top: 0;
+}
+
+form {
+  display: grid;
+  gap: 10px;
+}
+
+input,
+select {
+  width: 98%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  background-color: #dac3ab;
+  color: #fff;
+  border: none;
+  box-shadow: inset black 2px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 90px;
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 5px;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
